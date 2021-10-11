@@ -11,7 +11,7 @@ namespace CalculatorIdeagenTechnicalTest
             var testCase1 = "1 + 1";
             var testCase2 = "2 * 2";
             var testCase3 = "1 + 2 + 3";
-            var testCase4 = "6 / 3"; // put your own test case
+            var testCase4 = "6 / 2"; // put your own test case
             Console.WriteLine($"1#: {Calculate(testCase1)}");
             Console.WriteLine($"2#: {Calculate(testCase2)}");
             Console.WriteLine($"3#: {Calculate(testCase3)}");

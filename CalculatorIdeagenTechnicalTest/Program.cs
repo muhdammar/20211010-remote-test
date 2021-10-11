@@ -22,7 +22,7 @@ namespace CalculatorIdeagenTechnicalTest
         /// Can use tree algorithm or stack but need to rearrange the equation to prefix/postfix first
         /// Comment: since this one im not remember how to use it and i cant googling it,
         /// i think i wanna try design other logic using pseudocode.
-        /// HackerRank profile: https://www.hackerrank.com/ammar_azi
+        /// HackerRank profile: https://www.hackerrank.com/ammar_aziz
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
@@ -120,8 +120,6 @@ namespace CalculatorIdeagenTechnicalTest
                     {
                         if (items[j] == "+" )
                         {
-                            // 1 x 3
-                            //take index before and after "x" and calculate
                             var index = j;
                             var x = Double.Parse(items[j - 1]);
                             var y = Double.Parse(items[j + 1]);
@@ -133,8 +131,6 @@ namespace CalculatorIdeagenTechnicalTest
                     
                         if (items[j] == "-" )
                         {
-                            // 1 x 3
-                            //take index before and after "x" and calculate
                             var index = j;
                             var x = Double.Parse(items[j - 1]);
                             var y = Double.Parse(items[j + 1]);
@@ -151,29 +147,6 @@ namespace CalculatorIdeagenTechnicalTest
             {
                 return Double.Parse(items[0]);
             }
-            // foreach (var item in items)
-            // {
-            //     switch (item)
-            //     {
-            //         case "+":
-            //             // code block
-            //             break;
-            //         case "-":
-            //             // code block
-            //             break;
-            //         case "/":
-            //             // code block
-            //             break;
-            //         case "*":
-            //             // code block
-            //             break;
-            //         default:
-            //             var number = double.Parse(item);
-            //             numbers.Add(number);
-            //             break;
-            //     }
-            // }
-
             return -1;
         }
     }

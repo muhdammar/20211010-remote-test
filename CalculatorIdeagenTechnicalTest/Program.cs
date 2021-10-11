@@ -8,10 +8,10 @@ namespace CalculatorIdeagenTechnicalTest
     {
         static void Main(string[] args)
         {
-            var testCase1 = "1 x 2 + 2 / 2 - 3";
-            var testCase2 = "1 x 4 - 4 + 6 / 3 - 3 + 7";
-            var testCase3 = "1 x 7 - 4 - 6 / 2 + 2";
-            var testCase4 = "1 + 4"; // put your own test case
+            var testCase1 = "1 + 1";
+            var testCase2 = "2 * 2";
+            var testCase3 = "1 + 2 + 3";
+            var testCase4 = "6 / 3"; // put your own test case
             Console.WriteLine($"1#: {Calculate(testCase1)}");
             Console.WriteLine($"2#: {Calculate(testCase2)}");
             Console.WriteLine($"3#: {Calculate(testCase3)}");
@@ -72,7 +72,7 @@ namespace CalculatorIdeagenTechnicalTest
             var steps = items.Count / 2;
                  for (int j = 0; j < items.Count; j++)
                  {
-                     if (items[j] == "x")
+                     if (items[j] == "*")
                          countX++;
                      if (items[j] == "/")
                          countDivide++;
@@ -90,7 +90,7 @@ namespace CalculatorIdeagenTechnicalTest
                 {
                     if (countDivide+countX > countXAndDivide)
                     {
-                        if (items[j] == "x" )
+                        if (items[j] == "*" )
                         {
                             // 1 x 3
                             //take index before and after "x" and calculate

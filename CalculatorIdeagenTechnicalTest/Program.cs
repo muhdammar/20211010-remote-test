@@ -8,8 +8,14 @@ namespace CalculatorIdeagenTechnicalTest
     {
         static void Main(string[] args)
         {
-            var expression = "1 + 1 + 2";
-            Console.WriteLine(Calculate(expression));
+            var testCase1 = "1 x 2 + 2 / 2 - 3";
+            var testCase2 = "1 x 4 - 4 + 6 / 3 - 3 + 7";
+            var testCase3 = "1 x 7 - 4 - 6 / 2 + 2";
+            var testCase4 = "1 + 4"; // put your own test case
+            Console.WriteLine($"1#: {Calculate(testCase1)}");
+            Console.WriteLine($"2#: {Calculate(testCase2)}");
+            Console.WriteLine($"3#: {Calculate(testCase3)}");
+            Console.WriteLine($"4#: {Calculate(testCase4)}");
         }
         /// <summary>
         /// Other Solution
@@ -31,6 +37,7 @@ namespace CalculatorIdeagenTechnicalTest
             //Step 3: 2 + 1 - 3
             //Step 4: 3 - 3
             //Answer: 0
+            //Output: Passed
             
             //TODO Test Case 2
             // 1 x 4 - 4 + 6 / 3 - 3 + 7 (6 symbols = 6 steps)
@@ -41,6 +48,7 @@ namespace CalculatorIdeagenTechnicalTest
             //Step 5: 0 + (-1 + 7)
             //Step 6: 0 + 6
             //Answer: 6
+            //Output: Passed
             
             //TODO Test Case 3
             // 1 x 7 - 4 - 6 / 2 + 2 (5 symbols = 5 steps)
@@ -50,71 +58,96 @@ namespace CalculatorIdeagenTechnicalTest
             //Step 4: (3 - 3) + 2
             //Step 5: 0 + 2
             //Answer: 2
+            //Output: Passed
             
             //Pseudocode
             //1. Count steps, each symbol assume 1 step
             //2. Finish multiply or divide first
             //3. finish subtract and addition
-            
+            var countX = 0;
+            var countDivide = 0;
+            var countAdd = 0;
+            var countMinus = 0;
             var items = expression.Split(" ").ToList();
             var steps = items.Count / 2;
-            
+                 for (int j = 0; j < items.Count; j++)
+                 {
+                     if (items[j] == "x")
+                         countX++;
+                     if (items[j] == "/")
+                         countDivide++;
+                     if (items[j] == "+")
+                         countAdd++;
+                     if (items[j] == "-")
+                         countMinus++;
+                 }
+            var countXAndDivide = 0;
+            var countAddAndMinus = 0;   
             for (int i = 0; i < steps; i++)
             {
+               
                 for (int j = 0; j < items.Count; j++)
                 {
-                    if (items[j] == "x" )
+                    if (countDivide+countX > countXAndDivide)
                     {
-                        // 1 x 3
-                        //take index before and after "x" and calculate
-                        var index = j;
-                        var x = Double.Parse(items[j - 1]);
-                        var y = Double.Parse(items[j + 1]);
-                        var calculate = x * y;
-                        items.Insert(j - 1, calculate.ToString());
-                        items.RemoveAt(j);
-                        items.RemoveAt(j+1);
-                    }
+                        if (items[j] == "x" )
+                        {
+                            // 1 x 3
+                            //take index before and after "x" and calculate
+                            var index = j;
+                            var x = Double.Parse(items[j - 1]);
+                            var y = Double.Parse(items[j + 1]);
+                            var calculate = x * y;
+                            items.RemoveRange(j, 2);
+                            items[j - 1] = calculate.ToString();
+                            countXAndDivide++;
+                            break;
+                        }
 
-                    if (items[j] == "/")
-                    {
-                        var index = j;
-                        var x = Double.Parse(items[j - 1]);
-                        var y = Double.Parse(items[j + 1]);
-                        var calculate = x / y;
-                        items.Insert(j - 1, calculate.ToString());
-                        items.RemoveAt(j);
-                        items.RemoveAt(j+1);
+                        if (items[j] == "/")
+                        {
+                            var index = j;
+                            var x = Double.Parse(items[j - 1]);
+                            var y = Double.Parse(items[j + 1]);
+                            var calculate = x / y;
+                            items.RemoveRange(j, 2);
+                            items[j - 1] = calculate.ToString();
+                            countXAndDivide++;
+                            break;
+                        }
                     }
+                    else
+                    {
+                        if (items[j] == "+" )
+                        {
+                            // 1 x 3
+                            //take index before and after "x" and calculate
+                            var index = j;
+                            var x = Double.Parse(items[j - 1]);
+                            var y = Double.Parse(items[j + 1]);
+                            var calculate = x + y;
+                            items.RemoveRange(j, 2);
+                            items[j - 1] = calculate.ToString();
+                            break;
+                        }
                     
-                    if (items[j] == "+" )
-                    {
-                        // 1 x 3
-                        //take index before and after "x" and calculate
-                        var index = j;
-                        var x = Double.Parse(items[j - 1]);
-                        var y = Double.Parse(items[j + 1]);
-                        var calculate = x + y;
-                        items.Insert(j - 1, calculate.ToString());
-                        items.RemoveAt(j);
-                        items.RemoveAt(j+1);
+                        if (items[j] == "-" )
+                        {
+                            // 1 x 3
+                            //take index before and after "x" and calculate
+                            var index = j;
+                            var x = Double.Parse(items[j - 1]);
+                            var y = Double.Parse(items[j + 1]);
+                            var calculate = x - y;
+                            items.RemoveRange(j, 2);
+                            items[j - 1] = calculate.ToString();
+                            break;
+                        } 
                     }
-                    
-                    if (items[j] == "-" )
-                    {
-                        // 1 x 3
-                        //take index before and after "x" and calculate
-                        var index = j;
-                        var x = Double.Parse(items[j - 1]);
-                        var y = Double.Parse(items[j + 1]);
-                        var calculate = x - y;
-                        items.Insert(j - 1, calculate.ToString());
-                        items.RemoveAt(j);
-                        items.RemoveAt(j+1);
-                    }
+                   
                 }
             }
-            if (items.Count==2)
+            if (items.Count==1)
             {
                 return Double.Parse(items[0]);
             }
